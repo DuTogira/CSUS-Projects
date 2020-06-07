@@ -75,14 +75,15 @@ void sortBurstTime(struct process proc_arr[]);
 // The below functions are universally used by all three
 // scheduler algorithms
 void linkProcesses(struct process proc_arr[]);
+void unlinkProcesses(struct process proc_arr[]);
 int handleTimeAdjustments(struct process proc_arr[], int len);
 void relink(struct process proc_arr[]);
 int lRotate(struct process proc_arr[], int len);
 int getLen(struct process proc_arr[]);
 // Round Robin Stuff
-void unlinkProcesses(struct process proc_arr[]);
 void addToQueue(struct process proc_arr[]);
 int handlePreemptCounter(struct process proc_arr[], struct process head, int last_idx, int preempt_counter);
+void linkRR(struct process proc_arr[]);
 // The below functions are used for output
 void printProcArr(struct process proc_arr[]);
 void printProcArr2(struct process proc_arr[]);
@@ -227,17 +228,17 @@ void fillProcArr(const char* fname, struct process proc_arr[]){
 // A function to perform FCFS Scheduling
 void doFCFS(struct process proc_arr[]) {
     int needs_to_run = 1;
-    while (needs_to_run) {
+    do {
         /*printf("Proc Arr:\n");
         printProcArr2(proc_arr);*/
-        if (needs_to_run && proc_arr[0].is_done == 0)
-            handleTimeAdjustments(proc_arr, size);
+        if (proc_arr[0].is_done == 1)
+				break;
+		handleTimeAdjustments(proc_arr, size);
         // If our lead process is already done, rotate it out of 
         // the way until we have an unfinished process as leader
         // If we have no unfinished process, we're done
-        if (proc_arr[0].is_done)
-            needs_to_run = lRotate(proc_arr, size);
-    }
+		sortIsDone(proc_arr);
+    } while(needs_to_run);
 }
 
 // A function to perform RR Scheduling
@@ -257,16 +258,18 @@ void doRR(struct process proc_arr[], int interval) {
         // Check for and add any new processes to our RR queue
         addToQueue(proc_arr);
         len = getLen(proc_arr);
-        // simulate pre-emption by right rotating at each interval
+        // simulate pre-emption by left rotating at each interval
         if ((system_time > 0) && (preempt_counter > 0) &&
             (preempt_counter % interval == 0) && (proc_arr[0].burst_time > 0)) {
             needs_to_run = lRotate(proc_arr, len);
             preempt_counter = 0;
         }
         head = proc_arr[0];
-        if (needs_to_run)
+        if (needs_to_run){
             should_increment_preempt_counter = handleTimeAdjustments(proc_arr, len);
-        // Only run if the head process isn't done
+			linkRR(proc_arr);
+		}
+        // Only continue to run if the head process isn't done
         if (proc_arr[0].is_done)
             needs_to_run = lRotate(proc_arr, len);
         preempt_counter = handlePreemptCounter(proc_arr, head, len - 1, preempt_counter);
@@ -277,21 +280,21 @@ void doRR(struct process proc_arr[], int interval) {
 
 // A function to perform SRTF Scheduling
 void doSRTF(struct process proc_arr[]) {
-    int needs_to_run = 1;
-    int len = 0;
-    while (needs_to_run) {
+	int needs_to_run = 1;
+    do {
         // simulate pre-emption by re-sorting at each interval
         sortBurstTime(proc_arr);
         sortIsDone(proc_arr);
         relink(proc_arr);
-        len = getLen(proc_arr);
         // If our lead process is already done, rotate it out of 
         // the way until we have an unfinished process as leader
-        if (proc_arr[0].is_done || proc_arr[0].arrival_time > system_time)
-            needs_to_run = lRotate(proc_arr, len);
+		if(proc_arr[0].is_done)
+			break;
+        if (proc_arr[0].arrival_time > system_time)
+            needs_to_run = lRotate(proc_arr, size);
         if (needs_to_run && proc_arr[0].is_done == 0)
-            handleTimeAdjustments(proc_arr, len);
-    }
+            handleTimeAdjustments(proc_arr, size);
+    } while (needs_to_run);
 }
 
 /*--------------------------------------------------------
@@ -419,16 +422,6 @@ void sortIsDone(struct process proc_arr[]) {
         if (proc_arr[i].is_done)
             proc_arr[i].next = NULL;
     }
-
-    for (i = 0; i < size - 1; i++) {
-        if (proc_arr[i].is_done == 0 && proc_arr[i].arrival_time <= system_time) {
-            if (proc_arr[i + 1].next != NULL)
-                proc_arr[i].next = &proc_arr[i + 1];
-            else
-                proc_arr[i].next = &proc_arr[0];
-        }
-    }
-
 }
 
 /*--------------------------------------------------------
@@ -469,6 +462,7 @@ void sortBurstTime(struct process proc_arr[]) {
     // contains processes sorted by burst time
     for (i = 0; i < size; i++)
         proc_arr[i] = aux[i];
+		
 }
 
 /*--------------------------------------------------------
@@ -482,6 +476,14 @@ void linkProcesses(struct process proc_arr[]) {
             proc_arr[i].next = &proc_arr[i + 1];
         else
             proc_arr[i].next = &proc_arr[0];
+    }
+}
+
+
+// function to unlink our nodes
+void unlinkProcesses(struct process proc_arr[]) {
+    for (int i = 0; i < size; i++) {
+        proc_arr[i].next = NULL;
     }
 }
 
@@ -520,16 +522,8 @@ int handleTimeAdjustments(struct process proc_arr[], int len) {
 // Function to relink processes that aren't done.
 // Don't use for RR, it has special linking requirements
 void relink(struct process proc_arr[]) {
-    for (int i = 0; i < size - 1; i++) {
-        if (proc_arr[i].is_done == 0) {
-            if (proc_arr[i + 1].next != NULL)
-                proc_arr[i].next = &proc_arr[i + 1];
-            else
-                proc_arr[i].next = &proc_arr[0];
-        }
-    }
-    if (proc_arr[size - 1].next != NULL)
-        proc_arr[size - 1].next = &proc_arr[0];
+    unlinkProcesses(proc_arr);
+	linkProcesses(proc_arr);
 }
 
 // Function to left rotate the array of processes
@@ -569,6 +563,7 @@ int lRotate(struct process proc_arr[], int len) {
         }
         /*printf("Proc Arr After P (Exec):\n");
         printProcArr(proc_arr);*/
+        rotations++;
         // don't rotate through the full list more than once
         if (rotations == len) {
             /*printf("Proc Arr After Rotating (Done):\n");
@@ -580,7 +575,6 @@ int lRotate(struct process proc_arr[], int len) {
             }
             return 0;
         }
-        rotations++;
     } while (proc_arr[0].is_done || (proc_arr[0].arrival_time > system_time)); 
     /*printf("Proc Arr After Rotating (Exec):\n");
     printProcArr(proc_arr);*/
@@ -608,13 +602,6 @@ int getLen(struct process proc_arr[]) {
                    ROUND ROBIN STUFF
 --------------------------------------------------------*/
 
-// function to unlink our nodes
-void unlinkProcesses(struct process proc_arr[]) {
-    for (int i = 0; i < size; i++) {
-        proc_arr[i].next = NULL;
-    }
-}
-
 // function to add a new process to the RR queue
 void addToQueue(struct process proc_arr[]) {
     struct process walker = proc_arr[0];
@@ -641,6 +628,18 @@ int handlePreemptCounter(struct process proc_arr[], struct process head, int las
     if ((proc_arr[last_idx].is_done && last_idx > 0) || head.pid != proc_arr[0].pid)
         preempt_counter = 0;
     return preempt_counter;
+}
+
+// function to maintain the links in our RR queue
+void linkRR(struct process proc_arr[]){
+	for (int i = 0; i < size - 1; i++) {
+        if (proc_arr[i].is_done == 0 && proc_arr[i].arrival_time <= system_time) {
+            if (proc_arr[i + 1].next != NULL)
+                proc_arr[i].next = &proc_arr[i + 1];
+            else
+                proc_arr[i].next = &proc_arr[0];
+        }
+    }
 }
 
 /*--------------------------------------------------------
