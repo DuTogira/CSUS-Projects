@@ -90,17 +90,18 @@ int main (int argc, char *argv[]) {
 // Producer thread entry point
 void* producer(void* param) {
 	buffer_item item;
+	pthread_t tid = pthread_self();
 	while (1) {
 		/* sleep for a random period of time */
 		sleep(rand()%7);
 		/* generate a random number */
 		item = rand() + 1;
 		sem_wait(&empty);
-		pthread_mutex_lock(&mutex);
+		pthread_mutex_lock(&mutex);		
 		if (insert_item(item))
-			fprintf(stderr, "Producer failed to insert item\n");
+			fprintf(stderr, "Producer %d failed to insert item\n", tid);
 		else
-			printf("producer produced %d\n", item);
+			printf("producer %d produced %d\n", tid, item);
 		pthread_mutex_unlock(&mutex);
 		sem_post(&full);
 	}
@@ -108,15 +109,16 @@ void* producer(void* param) {
 
 void* consumer(void* param) {
 	buffer_item item;
+	pthread_t tid = pthread_self();
 	while (1) {
 		/* sleep for a random period of time */
 		sleep(rand()%7);
 		sem_wait(&full);
 		pthread_mutex_lock(&mutex);
 		if (remove_item(&item))
-			fprintf(stderr, "Consumer failed to remove item\n");
+			fprintf(stderr, "Consumer %d failed to remove item\n", tid);
 		else
-			printf("consumer consumed %d\n", item);
+			printf("consumer %d consumed %d\n", tid, item);
 		pthread_mutex_unlock(&mutex);
 		sem_post(&empty);
 	}
