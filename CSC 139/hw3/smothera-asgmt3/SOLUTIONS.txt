@@ -1,0 +1,815 @@
+Please note that for these solutions, I include some extra printed info
+to help the reader. Current Buffer data's print statements are commented out
+in my final submission.
+
+Trial 1 (more producers than consumers):
+[smothera@athena:68]> ./proj3 20 5 1                                                
+Current Buffer:
+0 719885387
+1 0
+2 0
+3 0
+4 0
+
+producer produced 719885387
+
+Current Buffer:
+0 719885387
+1 596516650
+2 0
+3 0
+4 0
+
+producer produced 596516650
+
+Current Buffer:
+0 719885387
+1 596516650
+2 1025202363
+3 0
+4 0
+
+producer produced 1025202363
+
+Current Buffer:
+0 596516650
+1 1025202363
+2 0
+3 0
+4 0
+
+consumer consumed 719885387
+
+Current Buffer:
+0 596516650
+1 1025202363
+2 1102520060
+3 0
+4 0
+
+producer produced 1102520060
+
+Current Buffer:
+0 596516650
+1 1025202363
+2 1102520060
+3 1967513927
+4 0
+
+producer produced 1967513927
+
+Current Buffer:
+0 596516650
+1 1025202363
+2 1102520060
+3 1967513927
+4 1540383427
+
+producer produced 1540383427
+
+Current Buffer:
+0 1025202363
+1 1102520060
+2 1967513927
+3 1540383427
+4 0
+
+consumer consumed 596516650
+
+Current Buffer:
+0 1025202363
+1 1102520060
+2 1967513927
+3 1540383427
+4 1303455737
+
+producer produced 1303455737
+
+Current Buffer:
+0 1102520060
+1 1967513927
+2 1540383427
+3 1303455737
+4 0
+
+consumer consumed 1025202363
+
+Current Buffer:
+0 1102520060
+1 1967513927
+2 1540383427
+3 1303455737
+4 35005212
+
+producer produced 35005212
+
+Current Buffer:
+0 1967513927
+1 1540383427
+2 1303455737
+3 35005212
+4 0
+
+consumer consumed 1102520060
+
+Current Buffer:
+0 1967513927
+1 1540383427
+2 1303455737
+3 35005212
+4 521595369
+
+producer produced 521595369
+
+
+
+Trial 2 (more consumers than producers):
+[smothera@athena:69]> ./proj3 20 1 5
+
+Current Buffer:
+0 719885387
+1 0
+2 0
+3 0
+4 0
+
+producer produced 719885387
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 719885387
+
+Current Buffer:
+0 1189641422
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1189641422
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1189641422
+
+Current Buffer:
+0 783368691
+1 0
+2 0
+3 0
+4 0
+
+producer produced 783368691
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 783368691
+
+Current Buffer:
+0 1967513927
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1967513927
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1967513927
+
+Current Buffer:
+0 304089173
+1 0
+2 0
+3 0
+4 0
+
+producer produced 304089173
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 304089173
+
+Current Buffer:
+0 521595369
+1 0
+2 0
+3 0
+4 0
+
+producer produced 521595369
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 521595369
+
+Current Buffer:
+0 336465783
+1 0
+2 0
+3 0
+4 0
+
+producer produced 336465783
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 336465783
+
+
+Trial 3 (equal consumer and producer):
+[smothera@athena:70]> ./proj3 20 5 5
+
+Current Buffer:
+0 1025202363
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1025202363
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1025202363
+
+Current Buffer:
+0 783368691
+1 0
+2 0
+3 0
+4 0
+
+producer produced 783368691
+
+Current Buffer:
+0 783368691
+1 1967513927
+2 0
+3 0
+4 0
+
+producer produced 1967513927
+
+Current Buffer:
+0 1967513927
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 783368691
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1967513927
+
+Current Buffer:
+0 1303455737
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1303455737
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1303455737
+
+Current Buffer:
+0 294702568
+1 0
+2 0
+3 0
+4 0
+
+producer produced 294702568
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 294702568
+
+Current Buffer:
+0 861021531
+1 0
+2 0
+3 0
+4 0
+
+producer produced 861021531
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 861021531
+
+Current Buffer:
+0 2145174068
+1 0
+2 0
+3 0
+4 0
+
+producer produced 2145174068
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 2145174068
+
+Current Buffer:
+0 1801979803
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1801979803
+
+Current Buffer:
+0 1801979803
+1 635723059
+2 0
+3 0
+4 0
+
+producer produced 635723059
+
+Current Buffer:
+0 635723059
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1801979803
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 635723059
+
+Current Buffer:
+0 1059961394
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1059961394
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1059961394
+
+Current Buffer:
+0 1131176230
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1131176230
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1131176230
+
+Current Buffer:
+0 1914544920
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1914544920
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1914544920
+
+Current Buffer:
+0 756898538
+1 0
+2 0
+3 0
+4 0
+
+producer produced 756898538
+
+Current Buffer:
+0 756898538
+1 1734575199
+2 0
+3 0
+4 0
+
+producer produced 1734575199
+
+Current Buffer:
+0 1734575199
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 756898538
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1734575199
+
+Current Buffer:
+0 412776092
+1 0
+2 0
+3 0
+4 0
+
+producer produced 412776092
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 412776092
+
+Current Buffer:
+0 749241874
+1 0
+2 0
+3 0
+4 0
+
+producer produced 749241874
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 749241874
+
+Current Buffer:
+0 982906997
+1 0
+2 0
+3 0
+4 0
+
+producer produced 982906997
+
+Current Buffer:
+0 982906997
+1 511702306
+2 0
+3 0
+4 0
+
+producer produced 511702306
+
+Current Buffer:
+0 511702306
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 982906997
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 511702306
+
+Current Buffer:
+0 572660337
+1 0
+2 0
+3 0
+4 0
+
+producer produced 572660337
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 572660337
+
+Current Buffer:
+0 1632621730
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1632621730
+
+Current Buffer:
+0 1632621730
+1 1141616125
+2 0
+3 0
+4 0
+
+producer produced 1141616125
+
+Current Buffer:
+0 1632621730
+1 1141616125
+2 1100661314
+3 0
+4 0
+
+producer produced 1100661314
+
+Current Buffer:
+0 1632621730
+1 1141616125
+2 1100661314
+3 2001100546
+4 0
+
+producer produced 2001100546
+
+Current Buffer:
+0 1141616125
+1 1100661314
+2 2001100546
+3 0
+4 0
+
+consumer consumed 1632621730
+
+Current Buffer:
+0 1100661314
+1 2001100546
+2 0
+3 0
+4 0
+
+consumer consumed 1141616125
+
+Current Buffer:
+0 2001100546
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1100661314
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 2001100546
+
+Current Buffer:
+0 760313751
+1 0
+2 0
+3 0
+4 0
+
+producer produced 760313751
+
+Current Buffer:
+0 760313751
+1 356426809
+2 0
+3 0
+4 0
+
+producer produced 356426809
+
+Current Buffer:
+0 356426809
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 760313751
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 356426809
+
+Current Buffer:
+0 1780695789
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1780695789
+
+Current Buffer:
+0 1780695789
+1 709393585
+2 0
+3 0
+4 0
+
+producer produced 709393585
+
+Current Buffer:
+0 1780695789
+1 709393585
+2 1918502652
+3 0
+4 0
+
+producer produced 1918502652
+
+Current Buffer:
+0 709393585
+1 1918502652
+2 0
+3 0
+4 0
+
+consumer consumed 1780695789
+
+Current Buffer:
+0 1918502652
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 709393585
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1918502652
+
+Current Buffer:
+0 943947740
+1 0
+2 0
+3 0
+4 0
+
+producer produced 943947740
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 943947740
+
+Current Buffer:
+0 1749698587
+1 0
+2 0
+3 0
+4 0
+
+producer produced 1749698587
+
+Current Buffer:
+0 1749698587
+1 1956297540
+2 0
+3 0
+4 0
+
+producer produced 1956297540
+
+Current Buffer:
+0 1956297540
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1749698587
+
+Current Buffer:
+0 0
+1 0
+2 0
+3 0
+4 0
+
+consumer consumed 1956297540

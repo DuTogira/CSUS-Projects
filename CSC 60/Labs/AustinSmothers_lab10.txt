@@ -1,0 +1,106 @@
+Script started on Thu 06 Dec 2018 02:33:31 PM PST
+[smothera@athena:21]> exit./a.out[23Ggcc lab10.c
+[smothera@athena:22]> gcc lab10.c[23Gexit[K./a.out
+csc60mshell> ls > lsout
+Argc = 3
+Argv 0 = ls 
+Argv 1 = > 
+Argv 2 = lsout 
+Child returned status: 0
+csc60mshell> cat lsout
+Argc = 2
+Argv 0 = cat 
+Argv 1 = lsout 
+a.out
+AustinSmothers_lab10.txt
+execvp.c
+lab10.c
+lsout
+redir.c
+waitpid.c
+Child returned status: 0
+csc60mshell> ls > lsout > file1
+Argc = 5
+Argv 0 = ls 
+Argv 1 = > 
+Argv 2 = lsout 
+Argv 3 = > 
+Argv 4 = file1 
+Cannot output to more than one file.: Success
+Child returned status: 256
+csc60mshell> cat foo.txt
+Argc = 2
+Argv 0 = cat 
+Argv 1 = foo.txt 
+cat: foo.txt: No such file or directory
+Child returned status: 256
+csc60mshell> > lsout
+Argc = 2
+Argv 0 = > 
+Argv 1 = lsout 
+No command entered.: Success
+Child returned status: 256
+csc60mshell> < lsout
+Argc = 2
+Argv 0 = < 
+Argv 1 = lsout 
+No command entered.: Success
+Child returned status: 256
+csc60mshell> wc < lsout
+Argc = 3
+Argv 0 = wc 
+Argv 1 = < 
+Argv 2 = lsout 
+ 7  7 72
+Child returned status: 0
+csc60mshell> wc < lsout > sw  wcout
+Argc = 5
+Argv 0 = wc 
+Argv 1 = < 
+Argv 2 = lsout 
+Argv 3 = > 
+Argv 4 = wcout 
+Child returned status: 0
+csc60mshell> cat wcout
+Argc = 2
+Argv 0 = cat 
+Argv 1 = wcout 
+ 7  7 72
+Child returned status: 0
+csc60mshell> wc < lsout < wcout
+Argc = 5
+Argv 0 = wc 
+Argv 1 = < 
+Argv 2 = lsout 
+Argv 3 = < 
+Argv 4 = wcout 
+Cannot input from more than one file.: Success
+Child returned status: 256
+csc60mshell> cd ../lab1
+Argc = 2
+Argv 0 = cd 
+Argv 1 = ../lab1 
+csc60mshell> gcc lab1.c
+Argc = 2
+Argv 0 = gcc 
+Argv 1 = lab1.c 
+Child returned status: 0
+csc60mshell> a.out
+Argc = 1
+Argv 0 = a.out 
+
+Lab 1 
+ 
+Hello World
+Hi, Austin 
+
+Lord Intel is summoning me
+
+Child returned status: 0
+csc60mshell> exit
+Argc = 1
+Argv 0 = exit 
+[smothera@athena:23]> exit
+exit
+
+Script done on Thu 06 Dec 2018 02:35:35 PM PST

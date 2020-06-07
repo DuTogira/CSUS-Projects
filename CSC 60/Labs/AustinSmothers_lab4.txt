@@ -1,0 +1,84 @@
+Script started on Thu 11 Oct 2018 03:34:00 PM PDT
+[smothera@athena:19]> cat lab4.c
+/*-------------------------------------------------*/
+/* Austin Smothers                                 */
+/* Lab 4                                           */
+/* Figure the perimeter and area of a polygon      */
+/* surrounded by a circle                          */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// define new file names
+#define LAB4_DATA "lab4.dat"
+#define LAB4_RECORD "lab4.txt"
+
+int main(void)
+{
+	// declaration of variables & file pointers
+	double perim, area, radius, numSides;
+	FILE * input_file;
+	FILE * output_file;
+
+	// open in the input and output files
+	input_file = fopen(LAB4_DATA, "r");
+	if(input_file == NULL){	
+		printf("Error on opening the data file\n");
+		exit(EXIT_FAILURE);	// if file can't open, abandon ship
+	}	
+	output_file = fopen(LAB4_RECORD, "w");
+	if(output_file == NULL) {
+		printf("Error on opening the output file\n");
+		exit(EXIT_FAILURE);	// if file can't open, abandon ship
+	}
+
+      /* All these fprintf statements use the file pointer
+         of answer_file.  Feel free to use your own variable
+         or the one I used.  You may delete this comment. */
+
+	fprintf(output_file, "\nAustin Smothers.  Lab 4.\n\n");
+	fprintf(output_file, "            Number      Perimeter      Area Of  \n");
+	fprintf(output_file, " Radius    Of Sides    Of Polygon      Polygon  \n");
+	fprintf(output_file, "--------   --------   ------------   -----------\n");
+	
+	// read the input_file using the while loop's argument
+	while((fscanf(input_file, "%lf%lf", &radius, &numSides)) == 2){
+		/*calculate the various attributes of the polygon
+		We do this by breaking the polygon into n triangles
+		where n is the number of sides of the polygon*/
+		perim = (((2 * numSides) * radius) * (sin(M_PI / numSides)));
+		area = ((numSides / 2) * (radius * radius) * 
+			(sin((2 * M_PI) / numSides)));
+
+		//print to the output file
+		fprintf(output_file, "%6.2f", radius);
+		fprintf(output_file, "%12.2f", numSides);
+		fprintf(output_file, "%14.4f", perim);
+		fprintf(output_file, "%15.4f\n", area); 
+	}
+	
+	// close the input and output files
+	fclose(input_file);
+	fclose(output_file);
+}
+/*------------------------------------------------------------------*/
+[smothera@athena:20]> gcc -lm lab4.c
+[smothera@athena:21]> ./a.out
+[smothera@athena:22]> cat lab4.txt
+
+Austin Smothers.  Lab 4.
+
+            Number      Perimeter      Area Of  
+ Radius    Of Sides    Of Polygon      Polygon  
+--------   --------   ------------   -----------
+  4.20        6.00       25.2000        45.8301
+  3.10        4.00       17.5362        19.2200
+ 10.50       10.00       64.8936       324.0166
+ 23.00        8.00      140.8275      1496.2379
+  9.70        4.00       54.8715       188.1800
+ 15.90        5.00       93.4579       601.0915
+[smothera@athena:23]> exit
+exit
+
+Script done on Thu 11 Oct 2018 03:34:36 PM PDT

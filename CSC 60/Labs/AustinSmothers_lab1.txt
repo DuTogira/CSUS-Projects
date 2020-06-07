@@ -1,0 +1,32 @@
+Script started on Tue 18 Sep 2018 03:27:34 PM PDT
+[smothera@athena:1]> cat lab1.c
+/*----------------------*/
+/*Austin Smothers       */
+/*Lab 1                 */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (void)
+{
+	printf("\nLab 1 \n \n");
+	printf("Hello World\n");
+	printf("Hi, Austin \n\n");
+	printf("Lord Intel is summoning me\n\n");
+	return EXIT_SUCCESS;
+}
+/*----------------------*/
+[smothera@athena:2]> gcc lab1.c
+[smothera@athena:3]> a.out
+
+Lab 1 
+ 
+Hello World
+Hi, Austin 
+
+Lord Intel is summoning me
+
+[smothera@athena:4]> exit
+exit
+
+Script done on Tue 18 Sep 2018 03:29:18 PM PDT

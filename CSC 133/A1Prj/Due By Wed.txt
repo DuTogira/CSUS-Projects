@@ -1,0 +1,8 @@
+a: add new asteroid (Asteroid)
+y: Add a NPS to the world (NonPlayerShip)
+b: add a new blinking space station to the world
+s: add a PS to the world (PlayerShip)
+f: fire a missile out of the PS. If out of missiles, print an error message.
+L: launch a missile out of the front of the NPS. if the ship has no more missiles, print an error message.
+m: print a map showing the world state (Everything)
+p: print score (GameWorld), number of missiles in player ship (PlayerShip), elapsed time (GameWorld), and number of lives (GameWorld)

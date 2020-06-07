@@ -1,0 +1,41 @@
+Script started on Tue 27 Nov 2018 11:12:09 PM PST
+[smothera@athena:21]> exitls[Kcd csc60[23G[5@mv lab8[36G[23Gscript AustinSmothers_lab8.txt[23Gvim lab8.c[K[23G./a.out[K[23Ggcc lab8.c[23G./a.out[K[23Gvim lab8.c[23Gscript AustinSmothers_lab8.txt[23Gmv lab8 csc60[K[23G[5Pcd[31G[23Gls[Kexit[Kgcc -std=c99 lab9.c
+[smothera@athena:22]> ./a.out
+csc60mshell> 
+Argc = 0
+csc60mshell>  
+Argc = 0
+csc60mshell> pwd
+Argc = 1
+Argv 0 = pwd 
+/gaia/class/student/smothera/csc60/lab9
+csc60mshell> cd ..
+Argc = 2
+Argv 0 = cd 
+Argv 1 = .. 
+csc60mshell> pwd
+Argc = 1
+Argv 0 = pwd 
+/gaia/class/student/smothera/csc60
+csc60mshell> cd lab9
+Argc = 2
+Argv 0 = cd 
+Argv 1 = lab9 
+csc60mshell> pwd
+Argc = 1
+Argv 0 = pwd 
+/gaia/class/student/smothera/csc60/lab9
+csc60mshell> cd
+Argc = 1
+Argv 0 = cd 
+csc60mshell> pwd
+Argc = 1
+Argv 0 = pwd 
+/gaia/class/student/smothera
+csc60mshell> exit
+Argc = 1
+Argv 0 = exit 
+[smothera@athena:23]> exit
+exit
+
+Script done on Tue 27 Nov 2018 11:13:24 PM PST

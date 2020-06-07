@@ -1,0 +1,32 @@
+//Austin Smothers
+//CSC 139
+//Homework 1
+
+//found via "cat /proc/cpuinfo"
+CPU Model Name: Intel(R) Xeon(R) Silver 4210 CPU @2.20GHz (Note that there are 4)
+
+//found via "cat /proc/version"
+Linux Kernel Version: 2.6.32-754.24.3.el6.i686
+GCC Version: Red Hat 4.4.7-23
+
+//found via "uptime", later confirmed via "htop"
+Time since last boot: 52 days, 23 hours, 46 minutes
+
+//found via "top -n 1 | grep Cpu"
+CPU time spent in user mode: 0.8%
+CPU time spent in system mode: 0.2%
+CPU time spent idle: 99.0%
+
+//found via "htop"
+Memory configured: 7.988 GB
+Memory availalbe: 6.832 GB
+
+//found via "iostat -d"
+Disk read: 57,265,636
+Disk write: 66,887,856
+
+//found via "cat /proc/2/status"
+Kernel context switches: 103,423
+
+//found via "cat /proc/stat"
+Processes created since boot: 16312007

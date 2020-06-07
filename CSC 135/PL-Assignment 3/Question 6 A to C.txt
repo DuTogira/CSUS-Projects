@@ -1,0 +1,15 @@
+%facts
+cars('Maserati', gas, hers).
+cars('Tesla Model S', electric, his).
+cars('Honda Leaf', electric, noone).
+cars('Toyota Avalon', gas, his).
+cars('Ford Fiesta', gas, noone).
+%rules
+cool(X) :- cars(X, electric, his).
+cool(X) :- cars(X, gas, hers).
+isGas(X) :- cars(X, gas, _).
+isElectric(X) :- cars(X, electric, _).
+%queries
+%?- cars(X, gas, _).
+%?- isElectric(X).
+%?- isElectric(X), cool(X).

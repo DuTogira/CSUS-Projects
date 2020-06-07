@@ -1,0 +1,220 @@
+Script started on Sun 23 Sep 2018 03:02:49 PM PDT
+[smothera@atoz:13]> history -c
+[smothera@atoz:14]> cd csc60
+~/csc60 
+[smothera@atoz:15]> mkdir lab2
+mkdir: cannot create directory `lab2': File exists
+[smothera@atoz:16]> cd lab2
+[smothera@atoz:17]> pwd
+/gaia/class/student/smothera/csc60/lab2
+[smothera@atoz:18]> mkdir jkl
+[smothera@atoz:19]> cd jkl
+[smothera@atoz:20]> pwd
+/gaia/class/student/smothera/csc60/lab2/jkl
+[smothera@atoz:21]> cd ..
+[smothera@atoz:22]> pwd
+/gaia/class/student/smothera/csc60/lab2
+[smothera@atoz:23]> ls > file1
+[smothera@atoz:24]> cat file1
+AustinSmothers_lab2.txt
+file1
+jkl/
+lab2.c
+[smothera@atoz:25]> less file1
+[?1049h[?1h=AustinSmothers_lab2.txt
+file1
+jkl/
+lab2.c
+[7mfile1 (END) [27m[K[K[?1l>[?1049l[smothera@atoz:26]> file *
+AustinSmothers_lab2.txt: empty
+file1:                   ASCII text
+jkl:                     setgid directory
+lab2.c:                  empty
+[smothera@atoz:27]> wc file1
+ 4  4 42 file1
+[smothera@atoz:28]> wc *
+      0       0       0 AustinSmothers_lab2.txt
+      4       4      42 file1
+wc: jkl: Is a directory
+      0       0       0 jkl
+      0       0       0 lab2.c
+      4       4      42 total
+[smothera@atoz:29]> grep lab file1
+AustinSmothers_lab2.txt
+lab2.c
+[smothera@atoz:30]> cp file1 file2
+[smothera@atoz:31]> ls
+AustinSmothers_lab2.txt  file1	file2  jkl/  lab2.c
+[smothera@atoz:32]> cd jkl
+[smothera@atoz:33]> cp ../file1
+cp: missing destination file operand after `../file1'
+Try `cp --help' for more information.
+[smothera@atoz:34]> cp ../file1 .
+[smothera@atoz:35]> ls
+file1
+[smothera@atoz:36]> mv file1 file2
+[smothera@atoz:37]> ls
+file2
+[smothera@atoz:38]> mv ../file1 .
+[smothera@atoz:39]> cd ..
+[smothera@atoz:40]> ls
+AustinSmothers_lab2.txt  file2	jkl/  lab2.c
+[smothera@atoz:41]> cd jkl
+[smothera@atoz:42]> ls
+file1  file2
+[smothera@atoz:43]> cmp file1 file2
+[smothera@atoz:44]> ls > jkllist
+[smothera@atoz:45]> cmp file1 jkllist
+file1 jkllist differ: byte 1, line 1
+[smothera@atoz:46]> diff file1 jkllist
+1d0
+< AustinSmothers_lab2.txt
+3,4c2,3
+< jkl/
+< lab2.c
+---
+> file2
+> jkllist
+[smothera@atoz:47]> rm file1
+[smothera@atoz:48]> ls
+file2  jkllist
+[smothera@atoz:49]> ps -u
+Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+smothera 12721  0.0  0.0 116748  2032 pts/0    Ss   14:55   0:00 -csh
+smothera 13483  0.0  0.0 107132   828 pts/0    S+   15:02   0:00 script AustinSm
+smothera 13485  0.0  0.0 107644   400 pts/0    S+   15:02   0:00 script AustinSm
+smothera 13486  0.0  0.0 110380  1800 pts/1    Ss   15:02   0:00 -sh -i
+smothera 13650  0.0  0.0 114484  1288 pts/1    R+   15:06   0:00 ps -u
+[smothera@atoz:50]> ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  2579 13486 13485  0  80   0 - 27595 sys_rt pts/1    00:00:00 csh
+0 R  2579 13654 13486  1  80   0 - 27036 -      pts/1    00:00:00 ps
+[smothera@atoz:51]> !!
+ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  2579 13486 13485  0  80   0 - 27595 sys_rt pts/1    00:00:00 csh
+0 R  2579 13655 13486  0  80   0 - 27037 -      pts/1    00:00:00 ps
+[smothera@atoz:52]> history
+    14	15:03	cd csc60
+    15	15:03	mkdir lab2
+    16	15:03	cd lab2
+    18	15:03	mkdir jkl
+    22	15:03	pwd
+    23	15:04	ls > file1
+    24	15:04	cat file1
+    25	15:04	less file1
+    26	15:04	file *
+    27	15:04	wc file1
+    28	15:04	wc *
+    29	15:04	grep lab file1
+    30	15:05	cp file1 file2
+    33	15:05	cp ../file1
+    34	15:05	cp ../file1 .
+    36	15:05	mv file1 file2
+    38	15:05	mv ../file1 .
+    39	15:06	cd ..
+    41	15:06	cd jkl
+    43	15:06	cmp file1 file2
+    44	15:06	ls > jkllist
+    45	15:06	cmp file1 jkllist
+    46	15:06	diff file1 jkllist
+    47	15:06	rm file1
+    48	15:06	ls
+    49	15:06	ps -u
+    51	15:07	ps -l
+    52	15:07	history
+[smothera@atoz:53]> !5
+5: Event not found.
+[smothera@atoz:53]> cd ..
+[smothera@atoz:54]> head lab1.c
+head: cannot open `lab1.c' for reading: No such file or directory
+[smothera@atoz:55]> ls
+AustinSmothers_lab2.txt  file2	jkl/  lab2.c
+[smothera@atoz:56]> cd..
+cd..: Command not found.
+[smothera@atoz:57]> cd ..
+[smothera@atoz:58]> ls
+lab1/  lab2/
+[smothera@atoz:59]> cd ..
+[smothera@atoz:60]> ls
+csc60/	html/
+[smothera@atoz:61]> head lab1.c
+head: cannot open `lab1.c' for reading: No such file or directory
+[smothera@atoz:62]> cd csc60
+[smothera@atoz:63]> ls
+lab1/  lab2/
+[smothera@atoz:64]> head lab1.c
+head: cannot open `lab1.c' for reading: No such file or directory
+[smothera@atoz:65]> tail lab1.c
+tail: cannot open `lab1.c' for reading: No such file or directory
+[smothera@atoz:66]> cd lab1
+[smothera@atoz:67]> ls
+a.out*	AustinSmothers_lab1.txt  lab1.c
+[smothera@atoz:68]> head lab1.c
+/*----------------------*/
+/*Austin Smothers       */
+/*Lab 1                 */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (void)
+{
+	printf("\nLab 1 \n \n");
+[smothera@atoz:69]> tail lab1.c
+
+int main (void)
+{
+	printf("\nLab 1 \n \n");
+	printf("Hello World\n");
+	printf("Hi, Austin \n\n");
+	printf("Lord Intel is summoning me\n\n");
+	return EXIT_SUCCESS;
+}
+/*----------------------*/
+[smothera@atoz:70]> ls -al | less
+[?1049h[?1h=total 24
+drwx--S--- 2 smothera stdcsc 4096 Sep 18 15:28 ./
+drwx--S--- 4 smothera stdcsc 4096 Sep 23 14:56 ../
+-rwx------ 1 smothera stdcsc 4742 Sep 18 15:28 a.out*
+-rw------- 1 smothera stdcsc  630 Sep 18 15:29 AustinSmothers_lab1.txt
+-rw------- 1 smothera stdcsc  314 Sep 18 15:25 lab1.c
+[7m(END) [27m[K[K[?1l>[?1049l[smothera@atoz:71]> history
+    15	15:03	mkdir lab2
+    16	15:03	cd lab2
+    18	15:03	mkdir jkl
+    22	15:03	pwd
+    23	15:04	ls > file1
+    24	15:04	cat file1
+    25	15:04	less file1
+    26	15:04	file *
+    27	15:04	wc file1
+    28	15:04	wc *
+    29	15:04	grep lab file1
+    30	15:05	cp file1 file2
+    33	15:05	cp ../file1
+    34	15:05	cp ../file1 .
+    36	15:05	mv file1 file2
+    38	15:05	mv ../file1 .
+    41	15:06	cd jkl
+    43	15:06	cmp file1 file2
+    44	15:06	ls > jkllist
+    45	15:06	cmp file1 jkllist
+    46	15:06	diff file1 jkllist
+    47	15:06	rm file1
+    49	15:06	ps -u
+    51	15:07	ps -l
+    56	15:08	cd..
+    59	15:08	cd ..
+    62	15:09	cd csc60
+    66	15:10	cd lab1
+    67	15:10	ls
+    68	15:10	head lab1.c
+    69	15:10	tail lab1.c
+    70	15:10	ls -al | less
+    71	15:11	history
+[smothera@atoz:72]> exit
+exit
+
+Script done on Sun 23 Sep 2018 03:11:18 PM PDT

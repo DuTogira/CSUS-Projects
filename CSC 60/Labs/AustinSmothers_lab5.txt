@@ -1,0 +1,113 @@
+Script started on Tue 16 Oct 2018 03:21:48 PM PDT
+[smothera@athena:21]> cat lab5.h
+//Lab 5 header file
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define IN_FILE  "lab5.dat"
+#define OUT_FILE "lab5.out"
+
+/* function prototype */
+void compute(double radius, double *area, double *cir); 
+
+[smothera@athena:22]> cat lab5.c
+/*-------------------------------------------------------*/
+/* Austin Smothers                                       */
+/* LAB 5, functions that "return" more than one value    */
+/* Given the radius, find the area and the circumference */
+/* of a circle                                           */
+
+#include "lab5.h"
+
+int main(void)
+{
+    double radius;	/* radius of a circle */
+    double area;	/* area of the circle */	
+    double cir;		/* circumference of the circle */
+
+    FILE * data_in;     /* input file pointer */
+    FILE * data_out;    /* output file pointer */
+
+
+	/* Open the two required files */
+    data_in = fopen(IN_FILE, "r");
+    if (data_in == NULL)
+    {
+       printf("Error on fopen file %s \n", IN_FILE);
+       exit(EXIT_FAILURE);
+    }
+
+    data_out = fopen(OUT_FILE, "w");
+    if (data_out == NULL)
+    {
+       printf("Error on fopen file %s \n", OUT_FILE);
+       exit(EXIT_FAILURE);
+    }
+
+    /* Print headers */
+    fprintf(data_out, "\nAustin Smothers.  Lab 5. \n\n");
+    fprintf(data_out, " Radius	    Area     Circumference  \n");
+    fprintf(data_out, "--------  --------  --------------- \n");
+
+	/* Loop thru the values to compute the answers  */
+    while ((fscanf(data_in, "%lf", &radius))== 1)
+    {
+	compute(radius, &area, &cir);
+
+        fprintf(data_out,"%7.2f  %8.2f  %11.2f  \n",
+                radius, area, cir);
+    }
+    fprintf(data_out, "\n");
+    fclose(data_in);
+    fclose(data_out);
+    return EXIT_SUCCESS;
+}
+/*-----------------------------------------------------------*/
+[smothera@athena:23]> cat compute.c
+/*----------------------------------------------------*/
+/* Austin Smothers                                    */
+/* Function to compute the area and the circumference */
+/* of a circle.                                       */
+
+#include<math.h>
+
+void compute(double radius, double *area, double *cir){
+	// Calculate the area
+	*area = M_PI * radius * radius;
+	// Calculate the circumference
+	*cir = 2 * M_PI * radius;
+	return; 
+}
+/*----------------------------------------------------*/
+[smothera@athena:24]> cat makefile
+lab5: lab5.o compute.o lab5.h
+	gcc lab5.o compute.o -o lab5 -lm
+lab5.o: lab5.c lab5.h
+	gcc -c lab5.c
+compute.o: compute.c lab5.h
+	gcc -c compute.c
+[smothera@athena:25]> touch lab5.h
+[smothera@athena:26]> make
+gcc -c lab5.c
+gcc -c compute.c
+gcc lab5.o compute.o -o lab5 -lm
+[smothera@athena:27]> lab5
+[smothera@athena:28]> cat lab5.out
+
+Austin Smothers.  Lab 5. 
+
+ Radius	    Area     Circumference  
+--------  --------  --------------- 
+   3.70     43.01        23.25  
+   6.80    145.27        42.73  
+   4.00     50.27        25.13  
+   5.60     98.52        35.19  
+  12.70    506.71        79.80  
+  45.60   6532.50       286.51  
+
+[smothera@athena:29]> exit
+exit
+
+Script done on Tue 16 Oct 2018 03:22:30 PM PDT
